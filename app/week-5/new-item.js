@@ -40,7 +40,7 @@ export default function NewItem() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 rounded border border-gray-200 bg-white p-4"
+      className="space-y-4 rounded border border-gray-200 bg-white p-4 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
     >
       <h2 className="mb-4 text-2xl font-bold">Week 5 — Add New Item</h2>
       <div className="flex flex-col">
@@ -57,10 +57,14 @@ export default function NewItem() {
           className="w-full rounded border px-3 py-2"
         />
       </div>
-      <div className="rounded border border-gray-200 bg-white p-4">
+      <div className="rounded border border-gray-200 bg-white p-4 dark:border-gray-600">
         <p className="mb-3">
-          <span className="text-sm text-gray-600">Quantity: </span>
-          <span className="text-xl font-semibold">{quantity}</span>
+          <span className="text-sm text-gray-600 dark:text-gray-900">
+            Quantity:{" "}
+          </span>
+          <span className="text-xl font-semibold dark:text-gray-900">
+            {quantity}
+          </span>
         </p>
         <div className="flex items-center gap-3">
           <button
@@ -69,8 +73,8 @@ export default function NewItem() {
             disabled={quantity === 1}
             className={`rounded px-4 py-2 ${
               quantity === 1
-                ? "cursor-not-allowed bg-gray-100 text-gray-400"
-                : "bg-gray-200 text-black hover:bg-gray-300"
+                ? "cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-gray-700"
+                : "bg-gray-200 text-black hover:bg-gray-300 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500"
             }`}
           >
             -
@@ -81,14 +85,16 @@ export default function NewItem() {
             disabled={quantity === 20}
             className={`rounded px-4 py-2 ${
               quantity === 20
-                ? "cursor-not-allowed bg-blue-200 text-gray-400"
+                ? "cursor-not-allowed bg-blue-200 text-gray-400 dark:bg-gray-700"
                 : "bg-blue-500 text-white hover:bg-blue-600"
             }`}
           >
             +
           </button>
         </div>
-        <p className="mt-2 text-xs text-gray-500">Allowed range: 1-20</p>
+        <p className="mt-2 text-xs text-gray-500 dark:text-gray-900">
+          Allowed range: 1-20
+        </p>
       </div>
       <div className="flex flex-col">
         <label htmlFor="category" className="mb-1 block text-sm font-medium">
@@ -98,7 +104,7 @@ export default function NewItem() {
           id="category"
           value={category}
           onChange={(event) => setCategory(event.target.value)}
-          className="w-full rounded border bg-white px-3 py-2"
+          className="w-full rounded border bg-white px-3 py-2 dark:bg-gray-800 dark:text-gray-100"
         >
           <option value="produce">Produce</option>
           <option value="dairy">Dairy</option>
