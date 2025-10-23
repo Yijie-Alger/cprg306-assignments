@@ -1,10 +1,20 @@
 "use client";
 import { useState } from "react";
 
-export default function NewItem() {
+export default function NewItem({ onAddItem }) {
   const [quantity, setQuantity] = useState(1);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("produce");
+
+  function generateId(length = 18) {
+    const chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let id = "";
+    for (let i = 0; i < length; i++) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return id;
+  }
 
   const increment = () => {
     setQuantity((count) => (count < 20 ? count + 1 : count));
@@ -17,18 +27,14 @@ export default function NewItem() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const categoryText =
-      event.target.category.options[event.target.category.selectedIndex].text;
-
-    const item = {
+    const newItem = {
+      id: generateId(),
       name,
       quantity,
-      categoryText,
+      category,
     };
 
-    alert(
-      `\nItem Name: ${name}\nQuantity: ${quantity}\nCategory: ${categoryText}`,
-    );
+    onAddItem(newItem);
 
     setName("");
     setQuantity(1);
@@ -40,7 +46,6 @@ export default function NewItem() {
       onSubmit={handleSubmit}
       className="space-y-4 rounded border border-gray-200 bg-white p-4 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
     >
-      <h2 className="mb-4 text-2xl font-bold">Week 5 — Add New Item</h2>
       <div className="flex flex-col">
         <label htmlFor="name" className="mb-1 block text-sm font-medium">
           Item Name:
